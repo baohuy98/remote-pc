@@ -15,8 +15,7 @@ function App() {
 
     window.electron.onServerResponse((data: any) => {
       if (data.action === 'screenshot' && data.data) {
-        const base64 = Buffer.from(data.data).toString('base64');
-        setScreenshot(`data:image/png;base64,${base64}`);
+        setScreenshot(`data:image/png;base64,${data.data}`);
       }
 
       if (data.action === 'list_processes' && data.data) {
