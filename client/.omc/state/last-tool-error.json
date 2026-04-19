@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"cd /c/Users/PC/Desktop/remote-pc-control/server && node probe.js 2>&1\",\"timeout\":60000,\"description\":\"Run protocol probe\"}",
+  "error": "Exit code 1\nnode:internal/modules/cjs/loader:1228\r\n  throw err;\r\n  ^\r\n\r\nError: Cannot find module 'socket.io-client'\r\nRequire stack:\r\n- C:\\Users\\PC\\Desktop\\remote-pc-control\\server\\probe.js\r\n    at Function._resolveFilename (node:internal/modules/cjs/loader:1225:15)\r\n    at Function._load (node:internal/modules/cjs/loader:1055:27)\r\n    at TracingChannel.traceSync (node:diagnostics_channel:322:14)\r\n    at wrapModuleLoad (node:internal/modules/cjs/loader:220:24)\r\n    at Module.require (node:intern...",
+  "timestamp": "2026-04-19T10:55:26.470Z",
+  "retry_count": 1
+}

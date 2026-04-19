@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1776187063290,
-  "projectRoot": "C:\\Users\\PC\\Desktop\\remote-pc-control",
+  "lastScanned": 1776536508989,
+  "projectRoot": "c:\\Users\\PC\\Desktop\\remote-pc-control",
   "techStack": {
     "languages": [],
     "frameworks": [],
@@ -35,7 +35,7 @@
       "path": "client",
       "purpose": null,
       "fileCount": 9,
-      "lastAccessed": 1776187063272,
+      "lastAccessed": 1776536508963,
       "keyFiles": [
         "eslint.config.js",
         "index.html",
@@ -48,14 +48,14 @@
       "path": "docs",
       "purpose": "Documentation",
       "fileCount": 0,
-      "lastAccessed": 1776187063273,
+      "lastAccessed": 1776536508964,
       "keyFiles": []
     },
     "server": {
       "path": "server",
       "purpose": null,
-      "fileCount": 3,
-      "lastAccessed": 1776187063273,
+      "fileCount": 5,
+      "lastAccessed": 1776536508965,
       "keyFiles": [
         "package-lock.json",
         "package.json",
@@ -66,42 +66,31 @@
       "path": "client\\node_modules",
       "purpose": "Dependencies",
       "fileCount": 1,
-      "lastAccessed": 1776187063274,
+      "lastAccessed": 1776536508967,
       "keyFiles": []
     },
     "client\\public": {
       "path": "client\\public",
       "purpose": "Public files",
       "fileCount": 2,
-      "lastAccessed": 1776187063275,
+      "lastAccessed": 1776536508968,
       "keyFiles": [
         "favicon.svg",
         "icons.svg"
-      ]
-    },
-    "client\\src": {
-      "path": "client\\src",
-      "purpose": "Source code",
-      "fileCount": 5,
-      "lastAccessed": 1776187063275,
-      "keyFiles": [
-        "App.css",
-        "App.tsx",
-        "electron.d.ts"
       ]
     },
     "server\\node_modules": {
       "path": "server\\node_modules",
       "purpose": "Dependencies",
       "fileCount": 1,
-      "lastAccessed": 1776187063276,
+      "lastAccessed": 1776536508970,
       "keyFiles": []
     },
     "server\\src": {
       "path": "server\\src",
       "purpose": "Source code",
       "fileCount": 3,
-      "lastAccessed": 1776187063276,
+      "lastAccessed": 1776536508971,
       "keyFiles": [
         "declarations.d.ts",
         "index.ts",
@@ -111,57 +100,153 @@
   },
   "hotPaths": [
     {
-      "path": "server\\src\\services\\screen.ts",
-      "accessCount": 2,
-      "lastAccessed": 1776187238679,
+      "path": "server\\src\\socket\\handler.ts",
+      "accessCount": 7,
+      "lastAccessed": 1776614704637,
       "type": "file"
     },
     {
-      "path": "client\\package.json",
-      "accessCount": 1,
-      "lastAccessed": 1776187082775,
-      "type": "file"
-    },
-    {
-      "path": "server\\package.json",
-      "accessCount": 1,
-      "lastAccessed": 1776187083096,
+      "path": "server\\src\\services\\system.ts",
+      "accessCount": 6,
+      "lastAccessed": 1776614705117,
       "type": "file"
     },
     {
       "path": "client\\src\\App.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1776187160858,
+      "accessCount": 5,
+      "lastAccessed": 1776614700916,
       "type": "file"
     },
     {
       "path": "server\\src\\index.ts",
-      "accessCount": 1,
-      "lastAccessed": 1776187161000,
+      "accessCount": 4,
+      "lastAccessed": 1776614700130,
       "type": "file"
     },
     {
-      "path": "client\\electron\\main.js",
-      "accessCount": 1,
-      "lastAccessed": 1776187166794,
+      "path": "server\\src\\services\\screen.ts",
+      "accessCount": 4,
+      "lastAccessed": 1776614706251,
       "type": "file"
     },
     {
       "path": "client\\electron\\preload.js",
-      "accessCount": 1,
-      "lastAccessed": 1776187167206,
+      "accessCount": 3,
+      "lastAccessed": 1776595979161,
       "type": "file"
     },
     {
-      "path": "server\\src\\socket\\handler.ts",
-      "accessCount": 1,
-      "lastAccessed": 1776187198794,
+      "path": "client\\electron\\main.js",
+      "accessCount": 3,
+      "lastAccessed": 1776595979502,
+      "type": "file"
+    },
+    {
+      "path": "client\\src\\electron.d.ts",
+      "accessCount": 3,
+      "lastAccessed": 1776595980770,
+      "type": "file"
+    },
+    {
+      "path": "server\\package.json",
+      "accessCount": 3,
+      "lastAccessed": 1776595981422,
+      "type": "file"
+    },
+    {
+      "path": "server\\src\\declarations.d.ts",
+      "accessCount": 2,
+      "lastAccessed": 1776538152385,
+      "type": "file"
+    },
+    {
+      "path": "plans\\20260419-0140-detected-issues-fixup\\plan.md",
+      "accessCount": 2,
+      "lastAccessed": 1776595965486,
+      "type": "file"
+    },
+    {
+      "path": "plans\\20260419-0140-detected-issues-fixup\\phase-01-fix-screen-info-handler.md",
+      "accessCount": 2,
+      "lastAccessed": 1776595966384,
+      "type": "file"
+    },
+    {
+      "path": "plans\\20260419-0140-detected-issues-fixup\\phase-02-add-shared-secret-auth.md",
+      "accessCount": 2,
+      "lastAccessed": 1776595966557,
+      "type": "file"
+    },
+    {
+      "path": "plans\\20260419-0140-detected-issues-fixup\\phase-03-fix-ipc-listener-leak.md",
+      "accessCount": 2,
+      "lastAccessed": 1776595967508,
+      "type": "file"
+    },
+    {
+      "path": "plans\\20260419-0140-detected-issues-fixup\\phase-04-remove-orphaned-screenshot-desktop.md",
+      "accessCount": 2,
+      "lastAccessed": 1776595967759,
+      "type": "file"
+    },
+    {
+      "path": "client\\package.json",
+      "accessCount": 2,
+      "lastAccessed": 1776596066069,
+      "type": "file"
+    },
+    {
+      "path": "README.md",
+      "accessCount": 2,
+      "lastAccessed": 1776614695072,
+      "type": "file"
+    },
+    {
+      "path": "server\\src\\services\\input.ts",
+      "accessCount": 2,
+      "lastAccessed": 1776614705762,
+      "type": "file"
+    },
+    {
+      "path": "server\\src\\services\\process.ts",
+      "accessCount": 2,
+      "lastAccessed": 1776614706442,
       "type": "file"
     },
     {
       "path": "server\\src\\types.ts",
       "accessCount": 1,
-      "lastAccessed": 1776187198809,
+      "lastAccessed": 1776537350991,
+      "type": "file"
+    },
+    {
+      "path": "docs\\superpowers\\plans\\2026-04-14-phase1-server-and-client-connection.md",
+      "accessCount": 1,
+      "lastAccessed": 1776537353742,
+      "type": "file"
+    },
+    {
+      "path": "server\\tsconfig.json",
+      "accessCount": 1,
+      "lastAccessed": 1776537361516,
+      "type": "file"
+    },
+    {
+      "path": "docs\\workflow.md",
+      "accessCount": 1,
+      "lastAccessed": 1776614832582,
+      "type": "file"
+    },
+    {
+      "path": "docs\\_prompts_raw.json",
+      "accessCount": 1,
+      "lastAccessed": 1776615293655,
+      "type": "file"
+    },
+    {
+      "path": "docs\\prompt-log.md",
+      "accessCount": 1,
+      "lastAccessed": 1776615342679,
       "type": "file"
     }
   ],
