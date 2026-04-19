@@ -1,4 +1,5 @@
 import { exec } from 'child_process';
+import si from 'systeminformation';
 import { Response } from '../types';
 
 function run(command: string): Promise<string> {
@@ -28,4 +29,12 @@ export async function lockPC(): Promise<Response> {
 export async function cancelShutdown(): Promise<Response> {
   await run('shutdown /a');
   return { action: 'cancel_shutdown', data: { message: 'Shutdown cancelled' }, success: true };
+}
+
+export async function getScreenInfo(): Promise<Response> {
+  const g = await si.graphics();
+  const primary = g.displays.find((d) => d.main) ?? g.displays[0];
+  const width = primary?.currentResX ?? 1920;
+  const height = primary?.currentResY ?? 1080;
+  return { action: 'screen_info', data: { width, height }, success: true };
 }

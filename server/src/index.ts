@@ -3,6 +3,12 @@ import { createServer } from 'http';
 import { Server } from 'socket.io';
 import { registerSocketHandler } from './socket/handler';
 
+const SECRET = process.env.RPC_SECRET;
+if (!SECRET) {
+  console.error('RPC_SECRET env var is required. Refusing to start.');
+  process.exit(1);
+}
+
 const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
@@ -10,6 +16,12 @@ const io = new Server(httpServer, {
     origin: '*',
     methods: ['GET', 'POST'],
   },
+});
+
+io.use((socket, next) => {
+  const token = (socket.handshake.auth as { token?: string } | undefined)?.token;
+  if (token === SECRET) return next();
+  next(new Error('unauthorized'));
 });
 
 const PORT = 3000;

@@ -21,18 +21,25 @@ function createWindow() {
 }
 
 // IPC: Connect to server
-ipcMain.on('connect-server', (_event, ip) => {
+ipcMain.on('connect-server', (_event, payload) => {
+  // Support disconnect sentinel: payload.ip === '__disconnect__'
+  const ip = typeof payload === 'string' ? payload : payload?.ip;
+  const token = typeof payload === 'object' && payload ? payload.token : '';
+
   // Disconnect existing socket if any
   if (socket) {
     socket.disconnect();
     socket = null;
   }
 
+  if (ip === '__disconnect__') return;
+
   console.log(`Connecting to server at ${ip}:3000...`);
   socket = io(`http://${ip}:3000`, {
     reconnection: true,
     reconnectionAttempts: 5,
     reconnectionDelay: 2000,
+    auth: { token },
   });
 
   socket.on('connect', () => {

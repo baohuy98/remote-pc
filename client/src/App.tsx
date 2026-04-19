@@ -3,6 +3,7 @@ import './App.css';
 
 function App() {
   const [serverIp, setServerIp] = useState('127.0.0.1');
+  const [secret, setSecret] = useState('');
   const [status, setStatus] = useState<'disconnected' | 'connected' | 'error'>('disconnected');
   const [screenshot, setScreenshot] = useState<string>('');
   const [processes, setProcesses] = useState<any[]>([]);
@@ -19,11 +20,11 @@ function App() {
 
   // Listen for server events
   useEffect(() => {
-    window.electron.onServerStatus((newStatus: string) => {
+    const offStatus = window.electron.onServerStatus((newStatus: string) => {
       setStatus(newStatus === 'connected' ? 'connected' : 'disconnected');
     });
 
-    window.electron.onServerResponse((data: any) => {
+    const offResponse = window.electron.onServerResponse((data: any) => {
       if (data.action === 'screenshot' && data.data) {
         setScreenshot(`data:image/png;base64,${data.data}`);
       }
@@ -34,7 +35,19 @@ function App() {
         setServerScreenSize(data.data);
       }
     });
+
+    return () => {
+      offStatus();
+      offResponse();
+    };
   }, []);
+
+  // Request server screen resolution once connected
+  useEffect(() => {
+    if (status === 'connected') {
+      sendCommand('screen_info');
+    }
+  }, [status, sendCommand]);
 
   // Auto-stream screenshots
   useEffect(() => {
@@ -52,11 +65,11 @@ function App() {
   }, [isStreaming, status, sendCommand]);
 
   const connectToServer = () => {
-    window.electron.connectServer(serverIp);
+    window.electron.connectServer({ ip: serverIp, token: secret });
   };
 
   const disconnect = () => {
-    window.electron.connectServer('__disconnect__');
+    window.electron.connectServer({ ip: '__disconnect__', token: '' });
     setStatus('disconnected');
     setIsStreaming(false);
     setScreenshot('');
@@ -134,6 +147,13 @@ function App() {
             value={serverIp}
             onChange={(e) => setServerIp(e.target.value)}
             placeholder="Server IP"
+            disabled={isConnected}
+          />
+          <input
+            type="password"
+            value={secret}
+            onChange={(e) => setSecret(e.target.value)}
+            placeholder="Secret"
             disabled={isConnected}
           />
           {!isConnected ? (

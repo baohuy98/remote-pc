@@ -1,12 +1,14 @@
 import { exec } from 'child_process';
+import { randomUUID } from 'crypto';
 import { readFile, writeFile, unlink } from 'fs/promises';
 import { tmpdir } from 'os';
 import path from 'path';
 import { Response } from '../types';
 
 export async function captureScreen(): Promise<Response> {
-  const tmpFile = path.join(tmpdir(), `screenshot_${Date.now()}.png`);
-  const psFile = path.join(tmpdir(), `screenshot_${Date.now()}.ps1`);
+  const id = randomUUID();
+  const tmpFile = path.join(tmpdir(), `screenshot_${id}.png`);
+  const psFile = path.join(tmpdir(), `screenshot_${id}.ps1`);
 
   const psScript = [
     'Add-Type -AssemblyName System.Windows.Forms',
@@ -22,26 +24,33 @@ export async function captureScreen(): Promise<Response> {
 
   await writeFile(psFile, psScript);
 
-  await new Promise<void>((resolve, reject) => {
-    exec(
-      `powershell -NoProfile -ExecutionPolicy Bypass -File "${psFile}"`,
-      (error, _stdout, stderr) => {
-        if (error) reject(new Error(stderr || error.message));
-        else resolve();
-      }
-    );
-  });
+  try {
+    await new Promise<void>((resolve, reject) => {
+      exec(
+        `powershell -NoProfile -STA -ExecutionPolicy Bypass -File "${psFile}"`,
+        (error, _stdout, stderr) => {
+          if (error) reject(new Error(stderr || error.message));
+          else resolve();
+        }
+      );
+    });
 
-  const imgBuffer = await readFile(tmpFile);
-  const base64 = imgBuffer.toString('base64');
+    const imgBuffer = await readFile(tmpFile);
+    const base64 = imgBuffer.toString('base64');
 
-  // Clean up temp files
-  unlink(tmpFile).catch(() => {});
-  unlink(psFile).catch(() => {});
-
-  return {
-    action: 'screenshot',
-    data: base64,
-    success: true,
-  };
+    return {
+      action: 'screenshot',
+      data: base64,
+      success: true,
+    };
+  } finally {
+    await Promise.all([
+      unlink(tmpFile).catch((e) => {
+        if (e?.code !== 'ENOENT') console.warn(`screen: failed to unlink ${tmpFile}:`, e?.message);
+      }),
+      unlink(psFile).catch((e) => {
+        if (e?.code !== 'ENOENT') console.warn(`screen: failed to unlink ${psFile}:`, e?.message);
+      }),
+    ]);
+  }
 }

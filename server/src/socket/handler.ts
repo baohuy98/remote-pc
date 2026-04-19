@@ -3,7 +3,7 @@ import { Command, Response } from '../types';
 import { captureScreen } from '../services/screen';
 import { listProcesses, killProcess } from '../services/process';
 import { pressKey, typeText, moveMouse, clickMouse } from '../services/input';
-import { shutdownPC, restartPC, lockPC, cancelShutdown } from '../services/system';
+import { shutdownPC, restartPC, lockPC, cancelShutdown, getScreenInfo } from '../services/system';
 
 export function registerSocketHandler(_io: Server, socket: Socket): void {
   socket.on('command', async (cmd: Command) => {
@@ -45,6 +45,9 @@ export function registerSocketHandler(_io: Server, socket: Socket): void {
           break;
         case 'cancel_shutdown':
           response = await cancelShutdown();
+          break;
+        case 'screen_info':
+          response = await getScreenInfo();
           break;
         default:
           response = { action: cmd.action, data: null, success: false, error: `Unknown action: ${cmd.action}` };
